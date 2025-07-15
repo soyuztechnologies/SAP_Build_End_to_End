@@ -1,0 +1,579 @@
+{
+	"info": {
+		"_postman_id": "19c34f31-545b-4cf2-8fc9-ffc24cf18dc6",
+		"name": "Anubhav SAP Build Course",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14691148"
+	},
+	"item": [
+		{
+			"name": "Get Products from service - search",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://orderscapapp.cfapps.eu10.hana.ondemand.com/service/OrderManagement/Products?$filter=contains(Name,'Laser')",
+					"protocol": "https",
+					"host": [
+						"orderscapapp",
+						"cfapps",
+						"eu10",
+						"hana",
+						"ondemand",
+						"com"
+					],
+					"path": [
+						"service",
+						"OrderManagement",
+						"Products"
+					],
+					"query": [
+						{
+							"key": "$filter",
+							"value": "contains(Name,'Laser')"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get the order by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://orderscapapp.cfapps.eu10.hana.ondemand.com/service/OrderManagement/Orders/3a2d8d40-14b9-40ae-86d2-f3294f32ea5e?$expand=orderItems",
+					"protocol": "https",
+					"host": [
+						"orderscapapp",
+						"cfapps",
+						"eu10",
+						"hana",
+						"ondemand",
+						"com"
+					],
+					"path": [
+						"service",
+						"OrderManagement",
+						"Orders",
+						"3a2d8d40-14b9-40ae-86d2-f3294f32ea5e"
+					],
+					"query": [
+						{
+							"key": "$expand",
+							"value": "orderItems"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get the order by Id Copy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://orderscapapp.cfapps.eu10.hana.ondemand.com/service/OrderManagement/$metadata",
+					"protocol": "https",
+					"host": [
+						"orderscapapp",
+						"cfapps",
+						"eu10",
+						"hana",
+						"ondemand",
+						"com"
+					],
+					"path": [
+						"service",
+						"OrderManagement",
+						"$metadata"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Item data format",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://orderscapapp.cfapps.eu10.hana.ondemand.com/service/OrderManagement/OrderItems?$top=1",
+					"protocol": "https",
+					"host": [
+						"orderscapapp",
+						"cfapps",
+						"eu10",
+						"hana",
+						"ondemand",
+						"com"
+					],
+					"path": [
+						"service",
+						"OrderManagement",
+						"OrderItems"
+					],
+					"query": [
+						{
+							"key": "$top",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create New Order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"customer\": \"001\",\r\n    \"date\": \"2025-04-18T07:38:41Z\",\r\n    \"status\": \"CART\",\r\n    \"total\": 0,\r\n    \"currency_code\": \"USD\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://orderscapapp.cfapps.eu10.hana.ondemand.com/service/OrderManagement/Orders",
+					"protocol": "https",
+					"host": [
+						"orderscapapp",
+						"cfapps",
+						"eu10",
+						"hana",
+						"ondemand",
+						"com"
+					],
+					"path": [
+						"service",
+						"OrderManagement",
+						"Orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "How to Call BPA API to trigger our Sales order process",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "password",
+							"value": "Anubhav@322",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "anubhav.abap@gmail.com",
+							"type": "string"
+						},
+						{
+							"key": "clientSecret",
+							"value": "8d5c77dc-5fc8-4b30-8df9-1460b4c1661b$IGS151DbL4FP39PfuG8Ss5ufk7mOWQdRdMRg3Y2rO7U=",
+							"type": "string"
+						},
+						{
+							"key": "accessTokenUrl",
+							"value": "https://78abc425trial.authentication.us10.hana.ondemand.com/oauth/token",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "sb-0794490c-508c-4cdd-a8a1-c0e0c3af19de!b433805|xsuaa!b49390",
+							"type": "string"
+						},
+						{
+							"key": "grant_type",
+							"value": "password_credentials",
+							"type": "string"
+						},
+						{
+							"key": "tokenName",
+							"value": "AnubhavTrainings",
+							"type": "string"
+						},
+						{
+							"key": "client_authentication",
+							"value": "body",
+							"type": "string"
+						},
+						{
+							"key": "scope",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"definitionId\": \"us10.78abc425trial.salesorderapproval.salesOrderApproval\",\r\n    \"context\": {\r\n        \"orderid\": \"3a2d8d40-14b9-40ae-86d2-f3294f32ea5e\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://spa-api-gateway-bpi-us-prod.cfapps.us10.hana.ondemand.com/workflow/rest/v1/workflow-instances",
+					"protocol": "https",
+					"host": [
+						"spa-api-gateway-bpi-us-prod",
+						"cfapps",
+						"us10",
+						"hana",
+						"ondemand",
+						"com"
+					],
+					"path": [
+						"workflow",
+						"rest",
+						"v1",
+						"workflow-instances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Orders and store in Enviornment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let orders = pm.response.json().value;\r",
+							"let orderIds = orders.map(order => order.ID);\r",
+							"pm.environment.set(\"orderIds\", JSON.stringify(orderIds));\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://orderscapapp.cfapps.eu10.hana.ondemand.com/service/OrderManagement/Orders",
+					"protocol": "https",
+					"host": [
+						"orderscapapp",
+						"cfapps",
+						"eu10",
+						"hana",
+						"ondemand",
+						"com"
+					],
+					"path": [
+						"service",
+						"OrderManagement",
+						"Orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete orders in a batch",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(`Deleted Order ID: ${pm.environment.get(\"orderId\")}`);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"let orderIds = JSON.parse(pm.environment.get(\"orderIds\"));\r",
+							"let currentOrderId = orderIds.shift();\r",
+							"if (currentOrderId) {\r",
+							"    pm.environment.set(\"orderIds\", JSON.stringify(orderIds));\r",
+							"    pm.environment.set(\"orderId\", currentOrderId);\r",
+							"    pm.execution.setNextRequest(pm.info.requestName);\r",
+							"} else {\r",
+							"    pm.environment.unset(\"orderIds\");\r",
+							"    pm.execution.setNextRequest(null);\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://orderscapapp.cfapps.eu10.hana.ondemand.com/service/OrderManagement/Orders/{{orderId}}",
+					"protocol": "https",
+					"host": [
+						"orderscapapp",
+						"cfapps",
+						"eu10",
+						"hana",
+						"ondemand",
+						"com"
+					],
+					"path": [
+						"service",
+						"OrderManagement",
+						"Orders",
+						"{{orderId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SAP S/4HANA Business Partners",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "SAPUSER",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "SAPPASS",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://s4dev.st.com:8021/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_BusinessPartner?$format=json&$select=BusinessPartner,BusinessPartnerName,BusinessPartnerCategory,CreatedByUser&$top=5",
+					"protocol": "http",
+					"host": [
+						"s4dev",
+						"st",
+						"com"
+					],
+					"port": "8021",
+					"path": [
+						"sap",
+						"opu",
+						"odata",
+						"sap",
+						"API_BUSINESS_PARTNER",
+						"A_BusinessPartner"
+					],
+					"query": [
+						{
+							"key": "$format",
+							"value": "json"
+						},
+						{
+							"key": "$select",
+							"value": "BusinessPartner,BusinessPartnerName,BusinessPartnerCategory,CreatedByUser"
+						},
+						{
+							"key": "$top",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://api.foursquare.com/v3/places/search?query=hotel&ll=28.6097408%2C77.2046848&fields=fsq_id%2Cname%2Cgeocodes%2Clocation",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "fsq3bYy9FYT+xBknL99Bvp6MKL/cEvO1d/VMJmfm6e7nbng=",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.foursquare.com/v3/places/search?query=hotel&ll=28.6097408%2C77.2046848&fields=fsq_id%2Cname%2Cgeocodes%2Clocation",
+					"protocol": "https",
+					"host": [
+						"api",
+						"foursquare",
+						"com"
+					],
+					"path": [
+						"v3",
+						"places",
+						"search"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "hotel"
+						},
+						{
+							"key": "ll",
+							"value": "28.6097408%2C77.2046848"
+						},
+						{
+							"key": "fields",
+							"value": "fsq_id%2Cname%2Cgeocodes%2Clocation"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update BP Data",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "welcome@1234",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "mob5",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "x-csrf-token",
+						"value": "rSPpsREr_Sqe_FScF-jtig==",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"CityName\": \"Bangalore\",\r\n        \"Country\": \"IN\",\r\n        \"HouseNumber\": \"858\",\r\n        \"StreetName\": \"SN Road\",\r\n        \"PostalCode\": \"122066\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://stsrvr.mynetgear.com:8021/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_BusinessPartnerAddress(BusinessPartner='1002',AddressID='967')",
+					"protocol": "http",
+					"host": [
+						"stsrvr",
+						"mynetgear",
+						"com"
+					],
+					"port": "8021",
+					"path": [
+						"sap",
+						"opu",
+						"odata",
+						"sap",
+						"API_BUSINESS_PARTNER",
+						"A_BusinessPartnerAddress(BusinessPartner='1002',AddressID='967')"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update BP Data Copy",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "welcome@1234",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "mob5",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "x-csrf-token",
+						"value": "rSPpsREr_Sqe_FScF-jtig==",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"CityName\": \"Bangalore\",\r\n        \"Country\": \"IN\",\r\n        \"HouseNumber\": \"858\",\r\n        \"StreetName\": \"SN Road\",\r\n        \"PostalCode\": \"122066\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://stsrvr.mynetgear.com:8021/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_BusinessPartnerAddress(BusinessPartner='1002',AddressID='967')",
+					"protocol": "http",
+					"host": [
+						"stsrvr",
+						"mynetgear",
+						"com"
+					],
+					"port": "8021",
+					"path": [
+						"sap",
+						"opu",
+						"odata",
+						"sap",
+						"API_BUSINESS_PARTNER",
+						"A_BusinessPartnerAddress(BusinessPartner='1002',AddressID='967')"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
