@@ -1,0 +1,709 @@
+{
+	"info": {
+		"_postman_id": "84194753-e88d-472a-aa62-e70e2708dd29",
+		"name": "SAP Build Process Automation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14691148"
+	},
+	"item": [
+		{
+			"name": "Testing Business process from API",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "password",
+							"value": "Anubhav@322",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "anubhav.abap@gmail.com",
+							"type": "string"
+						},
+						{
+							"key": "clientSecret",
+							"value": "3c5c0dce-ba71-4bb6-8eec-ae7d3a3c15dd$hzXJ4bH7RgciDtlN7Qg4LCOy6Ed5MrVqqF3koMrZCpQ=",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "sb-13d617c3-6932-4a47-b4f1-1bff5014ecf4!b385791|xsuaa!b49390",
+							"type": "string"
+						},
+						{
+							"key": "accessTokenUrl",
+							"value": "https://13e19585trial.authentication.us10.hana.ondemand.com/oauth/token",
+							"type": "string"
+						},
+						{
+							"key": "grant_type",
+							"value": "password_credentials",
+							"type": "string"
+						},
+						{
+							"key": "tokenName",
+							"value": "Pushpa",
+							"type": "string"
+						},
+						{
+							"key": "client_authentication",
+							"value": "body",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"definitionId\": \"us10.13e19585trial.salesordermanagement.salesOrderApproval\",\r\n    \"context\": {\r\n        \"salesorderheader\": {\r\n            \"salesOrder\": \"1212\",\r\n            \"salesOrderType\": \"IN\",\r\n            \"salesOrganization\": \"1010\",\r\n            \"distributionChannel\": 10,\r\n            \"organizationDivision\": 10,\r\n            \"soldToParty\": \"ANUBHAV\",\r\n            \"salesOrderDate\": \"2025-12-02\",\r\n            \"totalNetAmount\": 480,\r\n            \"transactionCurrency\": \"EUR\",\r\n            \"customerGroup\": \"GRP1\"\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://spa-api-gateway-bpi-us-prod.cfapps.us10.hana.ondemand.com/workflow/rest/v1/workflow-instances",
+					"protocol": "https",
+					"host": [
+						"spa-api-gateway-bpi-us-prod",
+						"cfapps",
+						"us10",
+						"hana",
+						"ondemand",
+						"com"
+					],
+					"path": [
+						"workflow",
+						"rest",
+						"v1",
+						"workflow-instances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Shopping cart process",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "password",
+							"value": "Anubhav@322",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "anubhav.abap@gmail.com",
+							"type": "string"
+						},
+						{
+							"key": "clientSecret",
+							"value": "3c5c0dce-ba71-4bb6-8eec-ae7d3a3c15dd$hzXJ4bH7RgciDtlN7Qg4LCOy6Ed5MrVqqF3koMrZCpQ=",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "sb-13d617c3-6932-4a47-b4f1-1bff5014ecf4!b385791|xsuaa!b49390",
+							"type": "string"
+						},
+						{
+							"key": "accessTokenUrl",
+							"value": "https://13e19585trial.authentication.us10.hana.ondemand.com/oauth/token",
+							"type": "string"
+						},
+						{
+							"key": "grant_type",
+							"value": "password_credentials",
+							"type": "string"
+						},
+						{
+							"key": "tokenName",
+							"value": "Pushpa",
+							"type": "string"
+						},
+						{
+							"key": "client_authentication",
+							"value": "body",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"definitionId\": \"us10.13e19585trial.aacha.hana\",\r\n    \"context\": {\r\n        \"_name\": \"sonam\",\r\n        \"employername\": \"sap\",\r\n        \"budget\": 50000,\r\n        \"experience\": 10,\r\n        \"email\": \"sonam@sonm.com\",\r\n        \"country\": \"IN\",\r\n        \"skills\": [\r\n            \"ABAP\",\"SAP BTP\"\r\n        ]\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://spa-api-gateway-bpi-us-prod.cfapps.us10.hana.ondemand.com/workflow/rest/v1/workflow-instances",
+					"protocol": "https",
+					"host": [
+						"spa-api-gateway-bpi-us-prod",
+						"cfapps",
+						"us10",
+						"hana",
+						"ondemand",
+						"com"
+					],
+					"path": [
+						"workflow",
+						"rest",
+						"v1",
+						"workflow-instances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mass order processing",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "password",
+							"value": "Anubhav@322",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "anubhav.abap@gmail.com",
+							"type": "string"
+						},
+						{
+							"key": "clientSecret",
+							"value": "3c5c0dce-ba71-4bb6-8eec-ae7d3a3c15dd$hzXJ4bH7RgciDtlN7Qg4LCOy6Ed5MrVqqF3koMrZCpQ=",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "sb-13d617c3-6932-4a47-b4f1-1bff5014ecf4!b385791|xsuaa!b49390",
+							"type": "string"
+						},
+						{
+							"key": "accessTokenUrl",
+							"value": "https://13e19585trial.authentication.us10.hana.ondemand.com/oauth/token",
+							"type": "string"
+						},
+						{
+							"key": "grant_type",
+							"value": "password_credentials",
+							"type": "string"
+						},
+						{
+							"key": "tokenName",
+							"value": "Pushpa",
+							"type": "string"
+						},
+						{
+							"key": "client_authentication",
+							"value": "body",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"definitionId\": \"us10.13e19585trial.warehousemanagement.massOrderProcessing\",\r\n    \"context\": {\r\n        \"customerid\": \"ANTON\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://spa-api-gateway-bpi-us-prod.cfapps.us10.hana.ondemand.com/workflow/rest/v1/workflow-instances",
+					"protocol": "https",
+					"host": [
+						"spa-api-gateway-bpi-us-prod",
+						"cfapps",
+						"us10",
+						"hana",
+						"ondemand",
+						"com"
+					],
+					"path": [
+						"workflow",
+						"rest",
+						"v1",
+						"workflow-instances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create New Asset",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "clientSecret",
+							"value": "f47f1e77-eac0-46be-975c-49e34fb1c8a4$828Xj0ftcA2So5VQJK2lzB5nrTnNh3iAceX9_sOPbxY=",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "sb-f8f1c94c-0fb2-4710-8dbf-53e7774e3293!b399361|it-rt-3c2f8a17trial!b26655",
+							"type": "string"
+						},
+						{
+							"key": "accessTokenUrl",
+							"value": "https://3c2f8a17trial.authentication.us10.hana.ondemand.com/oauth/token",
+							"type": "string"
+						},
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "Anubhav@322",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "anubhav.abap@gmail.com",
+							"type": "string"
+						},
+						{
+							"key": "tokenName",
+							"value": "Pushpa",
+							"type": "string"
+						},
+						{
+							"key": "client_authentication",
+							"value": "body",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"d\":{\r\n        \"assetClass\":\"00003100\",\r\n        \"costCenter\":\"1900\",\r\n        \"companyCode\":\"1900\",\r\n        \"description\":\"Cyber Truck\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://3c2f8a17trial.it-cpitrial05-rt.cfapps.us10-001.hana.ondemand.com/http/createAssetfatwfm",
+					"protocol": "https",
+					"host": [
+						"3c2f8a17trial",
+						"it-cpitrial05-rt",
+						"cfapps",
+						"us10-001",
+						"hana",
+						"ondemand",
+						"com"
+					],
+					"path": [
+						"http",
+						"createAssetfatwfm"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transfer Asset",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "clientSecret",
+							"value": "f47f1e77-eac0-46be-975c-49e34fb1c8a4$828Xj0ftcA2So5VQJK2lzB5nrTnNh3iAceX9_sOPbxY=",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "sb-f8f1c94c-0fb2-4710-8dbf-53e7774e3293!b399361|it-rt-3c2f8a17trial!b26655",
+							"type": "string"
+						},
+						{
+							"key": "accessTokenUrl",
+							"value": "https://3c2f8a17trial.authentication.us10.hana.ondemand.com/oauth/token",
+							"type": "string"
+						},
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "Anubhav@322",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "anubhav.abap@gmail.com",
+							"type": "string"
+						},
+						{
+							"key": "tokenName",
+							"value": "Pushpa",
+							"type": "string"
+						},
+						{
+							"key": "client_authentication",
+							"value": "body",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"d\":{\r\n        \"transferToData\" :{\r\n            \"partAsset\":\"200000200003\",\r\n            \"partComco\":\"1901\",\r\n            \"partSubno\":\"0000\",\r\n            \"assetClass\":\"00003100\",\r\n            \"costCenter\":\"1901\",\r\n            \"description\": \"transfer\"\r\n        },\r\n        \"transferPostingData\":{\r\n            \"amount\":\"\",\r\n            \"currency\":\"\",\r\n            \"revOnRet\":\"\",\r\n            \"transVar\":\"\",\r\n            \"valueDate\":\"20250301\"\r\n        },\r\n        \"generalPostingData\":{\r\n            \"docDate\":\"20250301\",\r\n            \"docType\": \"AA\",\r\n            \"transDate\":\"20250301\",\r\n            \"companyCode\":\"1900\",\r\n            \"postingDate\":\"20250301\",\r\n            \"fiscalPeriod\":\"03\",\r\n            \"assetSubNumber\":\"0000\",\r\n            \"assetMainNumber\":\"200000200007\"\r\n        }\r\n\r\n        \r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://3c2f8a17trial.it-cpitrial05-rt.cfapps.us10-001.hana.ondemand.com/http/FixedAssetfatwfm",
+					"protocol": "https",
+					"host": [
+						"3c2f8a17trial",
+						"it-cpitrial05-rt",
+						"cfapps",
+						"us10-001",
+						"hana",
+						"ondemand",
+						"com"
+					],
+					"path": [
+						"http",
+						"FixedAssetfatwfm"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mass order processing Copy",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "password",
+							"value": "Anubhav@322",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "anubhav.abap@gmail.com",
+							"type": "string"
+						},
+						{
+							"key": "clientSecret",
+							"value": "3c5c0dce-ba71-4bb6-8eec-ae7d3a3c15dd$hzXJ4bH7RgciDtlN7Qg4LCOy6Ed5MrVqqF3koMrZCpQ=",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "sb-13d617c3-6932-4a47-b4f1-1bff5014ecf4!b385791|xsuaa!b49390",
+							"type": "string"
+						},
+						{
+							"key": "accessTokenUrl",
+							"value": "https://13e19585trial.authentication.us10.hana.ondemand.com/oauth/token",
+							"type": "string"
+						},
+						{
+							"key": "grant_type",
+							"value": "password_credentials",
+							"type": "string"
+						},
+						{
+							"key": "tokenName",
+							"value": "Pushpa",
+							"type": "string"
+						},
+						{
+							"key": "client_authentication",
+							"value": "body",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"definitionId\": \"us10.13e19585trial.warehousemanagement.massOrderProcessing\",\r\n    \"context\": {\r\n        \"customerid\": \"ANTON\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://spa-api-gateway-bpi-us-prod.cfapps.us10.hana.ondemand.com/workflow/rest/v1/workflow-instances",
+					"protocol": "https",
+					"host": [
+						"spa-api-gateway-bpi-us-prod",
+						"cfapps",
+						"us10",
+						"hana",
+						"ondemand",
+						"com"
+					],
+					"path": [
+						"workflow",
+						"rest",
+						"v1",
+						"workflow-instances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Employee Hiring Process",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "password",
+							"value": "Anubhav@322",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "anubhav.abap@gmail.com",
+							"type": "string"
+						},
+						{
+							"key": "clientSecret",
+							"value": "3c5c0dce-ba71-4bb6-8eec-ae7d3a3c15dd$hzXJ4bH7RgciDtlN7Qg4LCOy6Ed5MrVqqF3koMrZCpQ=",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "sb-13d617c3-6932-4a47-b4f1-1bff5014ecf4!b385791|xsuaa!b49390",
+							"type": "string"
+						},
+						{
+							"key": "accessTokenUrl",
+							"value": "https://13e19585trial.authentication.us10.hana.ondemand.com/oauth/token",
+							"type": "string"
+						},
+						{
+							"key": "grant_type",
+							"value": "password_credentials",
+							"type": "string"
+						},
+						{
+							"key": "tokenName",
+							"value": "Pushpa",
+							"type": "string"
+						},
+						{
+							"key": "client_authentication",
+							"value": "body",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"definitionId\": \"us10.13e19585trial.hrhiring.hiringTelant\",\r\n    \"context\": {\r\n        \"candidateinfo\": {\r\n            \"name\": \"Manish Bajaj\",\r\n            \"employerName\": \"\",\r\n            \"workExperience\": 0,\r\n            \"email\": \"install.abap@gmail.com\",\r\n            \"country\": \"\",\r\n            \"budget\": 0,\r\n            \"skills\": [\r\n                \"\"\r\n            ],\r\n            \"comment\": \"\"\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://spa-api-gateway-bpi-us-prod.cfapps.us10.hana.ondemand.com/workflow/rest/v1/workflow-instances",
+					"protocol": "https",
+					"host": [
+						"spa-api-gateway-bpi-us-prod",
+						"cfapps",
+						"us10",
+						"hana",
+						"ondemand",
+						"com"
+					],
+					"path": [
+						"workflow",
+						"rest",
+						"v1",
+						"workflow-instances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "check task",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en,de;q=0.9,en-US;q=0.8"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Cookie",
+						"value": "country=IN; AMCVS_227AC2D754DCAB340A4C98C6%40AdobeOrg=1; s_plt=8.20; s_pltp=undefined; s_cc=true; dtCookie=v_4_srv_-2D9_sn_VEC9H7MPHGJUETRT1VORM5FAE9DA59PJ; rxVisitor=17377066168094DSSNI0OIS7C528MNIN8KUJDJCNF9H73; __VCAP_ID__=ef27c2dc-6efb-49e8-6967-1b47; first.visit.webassistant=true; consent=true; theme=sap_horizon; hcb=; automation.editor.help.read=true; JSESSIONID=s%3ATBuxew_Fzh5sAc4wNCFiSz5HZ9JHqHfP.t9wC8TsVsCGdqJNPrsaldYutOlO%2FSq%2FEKRoGGPBK44Q; dtSa=-; s_sq=%5B%5BB%5D%5D; AMCV_227AC2D754DCAB340A4C98C6%40AdobeOrg=179643557%7CMCIDTS%7C20115%7CMCMID%7C18500556410536220503786248638303628682%7CMCAID%7CNONE%7CMCOPTOUT-1737918720s%7CNONE%7CvVersion%7C5.5.0; rxvt=1737913545291|1737907192664; dtPC=-9$311368453_506h51vCHVOMEACRLAJWUHFEBPFCACCOABKBTWF-0e0"
+					},
+					{
+						"key": "Origin",
+						"value": "https://13e19585trial.us10.process-automation.build.cloud.sap"
+					},
+					{
+						"key": "Referer",
+						"value": "https://13e19585trial.us10.process-automation.build.cloud.sap/comsapspaprocessautomation.comsapspainbox/inbox.html"
+					},
+					{
+						"key": "Sec-Fetch-Dest",
+						"value": "empty"
+					},
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": "cors"
+					},
+					{
+						"key": "Sec-Fetch-Site",
+						"value": "same-origin"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36"
+					},
+					{
+						"key": "X-CSRF-Token",
+						"value": "2f009e6435198561-FMMo5OLduSMhuozAkmuLzak7y1I"
+					},
+					{
+						"key": "X-Requested-With",
+						"value": "XMLHttpRequest"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Not A(Brand\";v=\"8\", \"Chromium\";v=\"132\", \"Google Chrome\";v=\"132\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "x-dtpc",
+						"value": "-9$311368453_506h51vCHVOMEACRLAJWUHFEBPFCACCOABKBTWF-0e0"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"status\": \"COMPLETED\",\r\n    \"decision\": \"approve\",\r\n    \"context\": {\r\n        \"skills\": [\"ABAP\"],\r\n        \"country\": \"IN\",\r\n        \"workExperience\": 10,\r\n        \"employerName\": \"sap\",\r\n        \"email\": \"sonam@sonm.com\",\r\n        \"budget\": 50000,\r\n        \"approved\": true,\r\n        \"comment\": \"aa\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://13e19585trial.us10.process-automation.build.cloud.sap/anu.workflowuimodule-0.0.1/bpmworkflowruntime/v1/task-instances/16ba5ac9-dc0a-11ef-92fc-eeee0a9d460b",
+					"protocol": "https",
+					"host": [
+						"13e19585trial",
+						"us10",
+						"process-automation",
+						"build",
+						"cloud",
+						"sap"
+					],
+					"path": [
+						"anu.workflowuimodule-0.0.1",
+						"bpmworkflowruntime",
+						"v1",
+						"task-instances",
+						"16ba5ac9-dc0a-11ef-92fc-eeee0a9d460b"
+					]
+				},
+				"description": "Generated from cURL: curl 'https://13e19585trial.us10.process-automation.build.cloud.sap/anu.workflowuimodule-0.0.1/bpmworkflowruntime/v1/task-instances/7124a2f2-dc08-11ef-92fc-eeee0a9d460b' \\\r\n  -X 'PATCH' \\\r\n  -H 'Accept: */*' \\\r\n  -H 'Accept-Language: en,de;q=0.9,en-US;q=0.8' \\\r\n  -H 'Connection: keep-alive' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -H 'Cookie: country=IN; AMCVS_227AC2D754DCAB340A4C98C6%40AdobeOrg=1; s_plt=8.20; s_pltp=undefined; s_cc=true; dtCookie=v_4_srv_-2D9_sn_VEC9H7MPHGJUETRT1VORM5FAE9DA59PJ; rxVisitor=17377066168094DSSNI0OIS7C528MNIN8KUJDJCNF9H73; __VCAP_ID__=ef27c2dc-6efb-49e8-6967-1b47; first.visit.webassistant=true; consent=true; theme=sap_horizon; hcb=; automation.editor.help.read=true; JSESSIONID=s%3ATBuxew_Fzh5sAc4wNCFiSz5HZ9JHqHfP.t9wC8TsVsCGdqJNPrsaldYutOlO%2FSq%2FEKRoGGPBK44Q; dtSa=-; s_sq=%5B%5BB%5D%5D; AMCV_227AC2D754DCAB340A4C98C6%40AdobeOrg=179643557%7CMCIDTS%7C20115%7CMCMID%7C18500556410536220503786248638303628682%7CMCAID%7CNONE%7CMCOPTOUT-1737918720s%7CNONE%7CvVersion%7C5.5.0; rxvt=1737913545291|1737907192664; dtPC=-9$311368453_506h51vCHVOMEACRLAJWUHFEBPFCACCOABKBTWF-0e0' \\\r\n  -H 'Origin: https://13e19585trial.us10.process-automation.build.cloud.sap' \\\r\n  -H 'Referer: https://13e19585trial.us10.process-automation.build.cloud.sap/comsapspaprocessautomation.comsapspainbox/inbox.html' \\\r\n  -H 'Sec-Fetch-Dest: empty' \\\r\n  -H 'Sec-Fetch-Mode: cors' \\\r\n  -H 'Sec-Fetch-Site: same-origin' \\\r\n  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36' \\\r\n  -H 'X-CSRF-Token: 2f009e6435198561-FMMo5OLduSMhuozAkmuLzak7y1I' \\\r\n  -H 'X-Requested-With: XMLHttpRequest' \\\r\n  -H 'sec-ch-ua: \"Not A(Brand\";v=\"8\", \"Chromium\";v=\"132\", \"Google Chrome\";v=\"132\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'x-dtpc: -9$311368453_506h51vCHVOMEACRLAJWUHFEBPFCACCOABKBTWF-0e0' \\\r\n  --data-raw '{\"status\":\"COMPLETED\",\"context\":{\"skills\":[],\"country\":\"IN\",\"workExperience\":10,\"employerName\":\"sap\",\"email\":\"sonam@sonm.com\",\"budget\":50000,\"approved\":true}}'"
+			},
+			"response": []
+		}
+	]
+}
