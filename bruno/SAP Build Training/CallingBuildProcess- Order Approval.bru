@@ -1,0 +1,49 @@
+meta {
+  name: CallingBuildProcess- Order Approval
+  type: http
+  seq: 1
+}
+
+post {
+  url: https://spa-api-gateway-bpi-us-prod.cfapps.us10.hana.ondemand.com/workflow/rest/v1/workflow-instances
+  body: json
+  auth: oauth2
+}
+
+auth:oauth2 {
+  grant_type: password
+  access_token_url: https://183776e1trial.authentication.us10.hana.ondemand.com/oauth/token
+  refresh_token_url: 
+  username: anubhav.abap@gmail.com
+  password: Anubhav@322
+  client_id: sb-3d472976-5f18-420c-a037-4819a0cefa10!b481494|xsuaa!b49390
+  client_secret: 65abff89-c2f5-488f-b809-4a9f9348b7a4$qdYMihixlzei7eZdaERmmsmX8qcxVz20b8lyoWVwzM8=
+  scope: 
+  credentials_placement: body
+  credentials_id: credentials
+  token_placement: header
+  token_header_prefix: Bearer
+  auto_fetch_token: true
+  auto_refresh_token: false
+}
+
+body:json {
+  {
+      "definitionId": "us10.183776e1trial.salesorderapproval.orderApproval",
+      "context": {
+          "salesorderheader": {
+              "salesOrder": 2000039,
+              "salesOrderType": "OR",
+              "salesOrganization": "1010",
+              "distributionChannel": "10",
+              "organizationDivision": "10",
+              "soldToParty": "BOSCH2",
+              "salesOrderDate": "2025-07-16",
+              "totalNetAmount": 5000,
+              "transactionCurrency": "USD",
+              "customerGroup": "CR1",
+              "approverId":"anubhav.abap@gmail.com"
+          }
+      }
+  }
+}
