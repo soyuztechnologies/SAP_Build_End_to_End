@@ -1,0 +1,14 @@
+#Password=<< Existing password/certificate removed on export >>
+#
+#Fri Feb 14 16:41:05 UTC 2025
+Description=My S4HANA system
+User=mob5
+sap.processautomation.enabled=true
+WebIDEEnabled=true
+sap-client=800
+URL=http\://stsrvr.mynetgear.com\:8021/sap/opu/odata/sap/API_SALES_ORDER_SRV/
+WebIDEUsage=odata_gen
+Name=S4HANA
+Type=HTTP
+Authentication=BasicAuthentication
+ProxyType=Internet
