@@ -1,0 +1,14 @@
+#jco.client.passwd=<< Existing password/certificate removed on export >>
+#jco.destination.repository.passwd=<< Existing password/certificate removed on export >>
+#
+#Wed Feb 26 06:29:07 UTC 2025
+jco.client.sysnr=21
+jco.destination.proxy_type=OnPremise
+Name=S4HANA_RFC
+jco.client.lang=EN
+Type=RFC
+jco.destination.auth_type=CONFIGURED_USER
+jco.client.client=800
+jco.client.user=mob5
+jco.destination.repository.user=mob5
+jco.client.ashost=stsrvr.mynetgear.com

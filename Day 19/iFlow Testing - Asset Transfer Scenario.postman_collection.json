@@ -1,0 +1,275 @@
+{
+	"info": {
+		"_postman_id": "193a154c-c673-4ac5-a0f7-15efcb119cfb",
+		"name": "iFlow Testing - Asset Transfer Scenario",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14691148"
+	},
+	"item": [
+		{
+			"name": "Testing iFlow",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "clientSecret",
+							"value": "f47f1e77-eac0-46be-975c-49e34fb1c8a4$828Xj0ftcA2So5VQJK2lzB5nrTnNh3iAceX9_sOPbxY=",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "sb-f8f1c94c-0fb2-4710-8dbf-53e7774e3293!b399361|it-rt-3c2f8a17trial!b26655",
+							"type": "string"
+						},
+						{
+							"key": "accessTokenUrl",
+							"value": "https://3c2f8a17trial.authentication.us10.hana.ondemand.com/oauth/token",
+							"type": "string"
+						},
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "PASSWORD",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "USERNAME",
+							"type": "string"
+						},
+						{
+							"key": "tokenName",
+							"value": "Pushpa",
+							"type": "string"
+						},
+						{
+							"key": "client_authentication",
+							"value": "body",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"definitionId\": \"us10.13e19585trial.warehousemanagement.massOrderProcessing\",\r\n    \"context\": {\r\n        \"customerid\": \"ANTON\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://3c2f8a17trial.it-cpitrial05-rt.cfapps.us10-001.hana.ondemand.com/http/getCCOwnerAddfatwfm?CompanyCode=1900&CostCenter=1900",
+					"protocol": "https",
+					"host": [
+						"3c2f8a17trial",
+						"it-cpitrial05-rt",
+						"cfapps",
+						"us10-001",
+						"hana",
+						"ondemand",
+						"com"
+					],
+					"path": [
+						"http",
+						"getCCOwnerAddfatwfm"
+					],
+					"query": [
+						{
+							"key": "CompanyCode",
+							"value": "1900"
+						},
+						{
+							"key": "CostCenter",
+							"value": "1900"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a New Asset",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "clientSecret",
+							"value": "f47f1e77-eac0-46be-975c-49e34fb1c8a4$828Xj0ftcA2So5VQJK2lzB5nrTnNh3iAceX9_sOPbxY=",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "sb-f8f1c94c-0fb2-4710-8dbf-53e7774e3293!b399361|it-rt-3c2f8a17trial!b26655",
+							"type": "string"
+						},
+						{
+							"key": "accessTokenUrl",
+							"value": "https://3c2f8a17trial.authentication.us10.hana.ondemand.com/oauth/token",
+							"type": "string"
+						},
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "PASSWORD",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "USERNAME",
+							"type": "string"
+						},
+						{
+							"key": "tokenName",
+							"value": "Pushpa",
+							"type": "string"
+						},
+						{
+							"key": "client_authentication",
+							"value": "body",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"d\": {\r\n        \"assetClass\":\"00003100\",\r\n        \"costCenter\":\"1901\",\r\n        \"companyCode\":\"1901\",\r\n        \"description\":\"Target Asset for SpaceX\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://3c2f8a17trial.it-cpitrial05-rt.cfapps.us10-001.hana.ondemand.com/http/createAssetfatwfm",
+					"protocol": "https",
+					"host": [
+						"3c2f8a17trial",
+						"it-cpitrial05-rt",
+						"cfapps",
+						"us10-001",
+						"hana",
+						"ondemand",
+						"com"
+					],
+					"path": [
+						"http",
+						"createAssetfatwfm"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Execute Asset Transfer",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "clientSecret",
+							"value": "f47f1e77-eac0-46be-975c-49e34fb1c8a4$828Xj0ftcA2So5VQJK2lzB5nrTnNh3iAceX9_sOPbxY=",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "sb-f8f1c94c-0fb2-4710-8dbf-53e7774e3293!b399361|it-rt-3c2f8a17trial!b26655",
+							"type": "string"
+						},
+						{
+							"key": "accessTokenUrl",
+							"value": "https://3c2f8a17trial.authentication.us10.hana.ondemand.com/oauth/token",
+							"type": "string"
+						},
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "PASSWORD",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "USERNAME",
+							"type": "string"
+						},
+						{
+							"key": "tokenName",
+							"value": "Pushpa",
+							"type": "string"
+						},
+						{
+							"key": "client_authentication",
+							"value": "body",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"d\":{\r\n        \"transferToData\" :{\r\n            \"partAsset\":\"200000200009\",\r\n            \"partComco\":\"1901\",\r\n            \"partSubno\":\"0000\",\r\n            \"assetClass\":\"00003100\",\r\n            \"costCenter\":\"1901\",\r\n            \"description\": \"anubhav trainings\"\r\n        },\r\n        \"transferPostingData\":{\r\n            \"amount\":\"\",\r\n            \"currency\":\"\",\r\n            \"revOnRet\":\"\",\r\n            \"transVar\":\"\",\r\n            \"valueDate\":\"20250302\"\r\n        },\r\n        \"generalPostingData\":{\r\n            \"docDate\":\"20250302\",\r\n            \"docType\": \"AA\",\r\n            \"transDate\":\"20250302\",\r\n            \"companyCode\":\"1900\",\r\n            \"postingDate\":\"20250302\",\r\n            \"fiscalPeriod\":\"03\",\r\n            \"assetSubNumber\":\"0000\",\r\n            \"assetMainNumber\":\"200000200019\"\r\n        }\r\n\r\n        \r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://3c2f8a17trial.it-cpitrial05-rt.cfapps.us10-001.hana.ondemand.com/http/FixedAssetfatwfm",
+					"protocol": "https",
+					"host": [
+						"3c2f8a17trial",
+						"it-cpitrial05-rt",
+						"cfapps",
+						"us10-001",
+						"hana",
+						"ondemand",
+						"com"
+					],
+					"path": [
+						"http",
+						"FixedAssetfatwfm"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

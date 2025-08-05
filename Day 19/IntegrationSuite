@@ -1,0 +1,16 @@
+#clientSecret=<< Existing password/certificate removed on export >>
+#
+#Wed Feb 26 06:29:25 UTC 2025
+tokenServiceURLType=Dedicated
+sap.applicationdevelopment.actions.enabled=true
+Description=Connect to iflow in suite
+clientId=sb-f8f1c94c-0fb2-4710-8dbf-53e7774e3293\!b399361|it-rt-3c2f8a17trial\!b26655
+sap.processautomation.enabled=true
+tokenServiceURL=https\://3c2f8a17trial.authentication.us10.hana.ondemand.com/oauth/token
+WebIDEEnabled=true
+sap-client=800
+URL=https\://3c2f8a17trial.it-cpitrial05-rt.cfapps.us10-001.hana.ondemand.com
+Name=IntegrationSuite
+Type=HTTP
+Authentication=OAuth2ClientCredentials
+ProxyType=Internet
