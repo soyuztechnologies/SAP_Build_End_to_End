@@ -1,0 +1,16 @@
+#clientSecret=<< Existing password/certificate removed on export >>
+#
+#Thu Aug 07 04:24:54 UTC 2025
+tokenServiceURLType=Dedicated
+Description=Connect CAS to CTMS so we can export our Process
+clientId=sb-8676f95b-56b7-4f7b-b7c7-b6679f946ed8\!b481494|alm-ts-backend\!b1603
+sourceSystemId=dev
+tokenServiceURL=https\://183776e1trial.authentication.us10.hana.ondemand.com/oauth/token
+sourceSystemId.CPI=dev
+URL=https\://transport-service-app-backend.ts.cfapps.us10.hana.ondemand.com
+Name=TransportManagementService
+Type=HTTP
+Authentication=OAuth2ClientCredentials
+sourceSystemId.APIManagement=dev
+ProxyType=Internet
+sourceSystemId.sap.build=dev
