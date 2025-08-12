@@ -1,0 +1,15 @@
+#
+#Wed Apr 23 03:14:55 UTC 2025
+sap.applicationdevelopment.actions.enabled=true
+Description=Shopping cart app service
+sap.processautomation.enabled=true
+MobileEnabled=true
+WebIDEEnabled=true
+URL=https\://orderscapapp.cfapps.eu10.hana.ondemand.com/service/OrderManagement
+Name=AnubhavShopping
+sap.build.usage=odata_gen
+Type=HTTP
+HTML5.DynamicDestination=true
+Authentication=NoAuthentication
+Appgyver.Enabled=true
+ProxyType=Internet
