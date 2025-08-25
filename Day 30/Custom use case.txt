@@ -1,0 +1,528 @@
+@EndUserText.label : 'service order header'
+@AbapCatalog.enhancement.category : #NOT_EXTENSIBLE
+@AbapCatalog.tableCategory : #TRANSPARENT
+@AbapCatalog.deliveryClass : #A
+@AbapCatalog.dataMaintenance : #RESTRICTED
+define table zsrv_order_hdr {
+
+  key client           : abap.clnt not null;
+  key service_order_id : sysuuid_c32 not null;
+  service_order_type   : abap.char(4);
+  customer_id          : abap.char(10);
+  created_by           : abap.char(12);
+  created_date         : abap.dats;
+  country              : land1;
+  status               : abap.char(2);
+
+}
+
+
+@EndUserText.label : 'service order items'
+@AbapCatalog.enhancement.category : #NOT_EXTENSIBLE
+@AbapCatalog.tableCategory : #TRANSPARENT
+@AbapCatalog.deliveryClass : #A
+@AbapCatalog.dataMaintenance : #RESTRICTED
+define table zsrv_order_item {
+
+  key client             : abap.clnt not null;
+  key service_item_id    : sysuuid_c32 not null;
+  key service_order_id   : sysuuid_c32 not null;
+  material               : abap.char(18);
+  product_hierarchy_id   : abap.char(18);
+  product_hierarchy      : abap.char(50);
+  sales_organization     : abap.char(4);
+  distribution_channel   : abap.char(2);
+  division               : abap.char(2);
+  service_order_template : abap.char(10);
+  warranty_only          : abap_boolean;
+
+}
+
+
+zcl_abap_file_uploader http service to upload
+OR
+Data generator class
+
+CLASS zcl_srv_order_data_generator DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC .
+
+  PUBLIC SECTION.
+    TYPES: BEGIN OF ty_generation_params,
+             number_of_orders TYPE i,
+             date_from        TYPE d,
+             date_to          TYPE d,
+           END OF ty_generation_params.
+
+    METHODS: generate_test_data
+               IMPORTING iv_params TYPE ty_generation_params,
+
+             clear_test_data,
+
+             display_generation_summary.
+    INTERFACES if_oo_adt_classrun .
+  PROTECTED SECTION.
+  PRIVATE SECTION.
+      TYPES: tt_header TYPE STANDARD TABLE OF zsrv_order_hdr WITH EMPTY KEY,
+           tt_items  TYPE STANDARD TABLE OF zsrv_order_item WITH EMPTY KEY.
+
+    DATA: mt_header_data TYPE tt_header,
+          mt_item_data   TYPE tt_items,
+          mv_generated_orders TYPE i,
+          mv_generated_items TYPE i.
+
+    METHODS: generate_header_data
+               IMPORTING iv_params TYPE ty_generation_params,
+
+             generate_item_data,
+
+             save_data_to_database,
+
+             get_random_service_type
+               RETURNING VALUE(rv_type) TYPE string,
+
+             get_random_customer_id
+               RETURNING VALUE(rv_customer) TYPE string,
+
+             get_random_country
+               RETURNING VALUE(rv_country) TYPE string,
+
+             get_random_material
+               RETURNING VALUE(rv_material) TYPE string,
+
+             get_random_product_hierarchy
+               RETURNING VALUE(rv_hierarchy) TYPE string,
+
+             get_random_template
+               RETURNING VALUE(rv_template) TYPE string,
+
+             get_random_user
+               RETURNING VALUE(rv_user) TYPE string,
+
+             generate_uuid
+               RETURNING VALUE(rv_uuid) TYPE sysuuid_c32,
+
+             get_random_number
+               IMPORTING iv_min TYPE i DEFAULT 1
+                         iv_max TYPE i
+               RETURNING VALUE(rv_number) TYPE i.
+ENDCLASS.
+
+
+
+CLASS zcl_srv_order_data_generator IMPLEMENTATION.
+
+
+  METHOD IF_OO_ADT_CLASSRUN~main.
+
+    me->generate_test_data( iv_params = value #( date_from = '20250201'
+                                                 date_to = '20250405'
+                                                 number_of_orders = 5000
+         )
+     ).
+
+  ENDMETHOD.
+
+  METHOD generate_test_data.
+
+    " Clear existing generated data
+    CLEAR: mt_header_data, mt_item_data, mv_generated_orders, mv_generated_items.
+
+    " Generate header records
+    generate_header_data( iv_params ).
+
+    " Generate corresponding item records
+    generate_item_data( ).
+
+    " Save to database
+    save_data_to_database( ).
+
+    " Display summary
+    display_generation_summary( ).
+
+  ENDMETHOD.
+
+  METHOD generate_header_data.
+
+    DATA: lv_date_range TYPE i,
+          lv_random_days TYPE i,
+          lv_date TYPE d.
+
+    " Calculate date range
+    lv_date_range = iv_params-date_to - iv_params-date_from.
+    IF lv_date_range <= 0.
+      lv_date_range = 30. " Default to 30 days if invalid range
+    ENDIF.
+
+    DO iv_params-number_of_orders TIMES.
+
+      " Generate random date within range
+      lv_random_days = get_random_number( iv_max = lv_date_range ).
+      lv_date = iv_params-date_from + lv_random_days.
+
+      APPEND VALUE #(
+        client             = sy-mandt
+        service_order_id   = generate_uuid( )
+        service_order_type = get_random_service_type( )
+        customer_id        = get_random_customer_id( )
+        created_by         = get_random_user( )
+        created_date       = lv_date
+        status             = COND #( WHEN sy-index MOD 4 = 0 THEN '04'  " Completed
+                                    WHEN sy-index MOD 3 = 0 THEN '03'   " In Progress
+                                    WHEN sy-index MOD 2 = 0 THEN '02'   " Confirmed
+                                    ELSE '01' )                          " Created
+        country            = get_random_country( )
+      ) TO mt_header_data.
+
+    ENDDO.
+
+    mv_generated_orders = lines( mt_header_data ).
+
+  ENDMETHOD.
+
+  METHOD generate_item_data.
+
+    DATA: lv_items_per_order TYPE i,
+          lv_counter TYPE i.
+
+    LOOP AT mt_header_data INTO DATA(ls_header).
+
+      " Random number of items per order (1-5)
+      lv_items_per_order = get_random_number( iv_min = 1 iv_max = 5 ).
+
+      DO lv_items_per_order TIMES.
+
+        lv_counter = lv_counter + 1.
+
+        DATA(lv_service_type) = get_random_service_type( ).
+
+        APPEND VALUE #(
+          client                  = sy-mandt
+          service_item_id         = generate_uuid( )
+          service_order_id        = ls_header-service_order_id
+          material                = get_random_material( )
+          product_hierarchy_id    = |PH-{ lv_service_type }-{ lv_counter }|
+          product_hierarchy       = get_random_product_hierarchy( )
+          sales_organization      = COND #( WHEN ls_header-country = 'USA' THEN '1000'
+                                           WHEN ls_header-country = 'DEU' THEN '2000'
+                                           WHEN ls_header-country = 'GBR' THEN '3000'
+                                           WHEN ls_header-country = 'FRA' THEN '4000'
+                                           WHEN ls_header-country = 'JPN' THEN '5000'
+                                           ELSE '9000' )
+          distribution_channel    = COND #( WHEN lv_counter MOD 4 = 0 THEN '40'
+                                           WHEN lv_counter MOD 3 = 0 THEN '30'
+                                           WHEN lv_counter MOD 2 = 0 THEN '20'
+                                           ELSE '10' )
+          division               = COND #( WHEN lv_service_type = 'TECH' THEN '01'
+                                          WHEN lv_service_type = 'CONS' THEN '02'
+                                          WHEN lv_service_type = 'MAIN' THEN '03'
+                                          WHEN lv_service_type = 'SUPP' THEN '04'
+                                          ELSE '05' )
+          service_order_template = get_random_template( )
+          warranty_only          = COND #( WHEN get_random_number( iv_max = 10 ) <= 3
+                                          THEN abap_true
+                                          ELSE abap_false )
+        ) TO mt_item_data.
+
+      ENDDO.
+
+    ENDLOOP.
+
+    mv_generated_items = lines( mt_item_data ).
+
+  ENDMETHOD.
+
+  METHOD save_data_to_database.
+
+    TRY.
+        " Insert header records using ABAP Cloud compatible syntax
+        IF lines( mt_header_data ) > 0.
+
+          INSERT zsrv_order_hdr FROM TABLE @mt_header_data.
+
+          IF sy-subrc = 0.
+            " Insert item records
+            IF lines( mt_item_data ) > 0.
+              INSERT zsrv_order_item FROM TABLE @mt_item_data.
+
+              IF sy-subrc <> 0.
+                " Rollback header if items fail
+                ROLLBACK WORK.
+                RETURN.
+              ENDIF.
+            ENDIF.
+
+            COMMIT WORK.
+
+          ELSE.
+            ROLLBACK WORK.
+          ENDIF.
+
+        ENDIF.
+
+      CATCH cx_sy_open_sql_db INTO DATA(lx_sql_error).
+        ROLLBACK WORK.
+
+
+    ENDTRY.
+
+  ENDMETHOD.
+
+  METHOD clear_test_data.
+
+    TRY.
+        " Delete all test data for current client
+        DELETE FROM zsrv_order_item .
+        DELETE FROM zsrv_order_hdr .
+
+        IF sy-subrc = 0.
+          COMMIT WORK.
+
+        ELSE.
+          ROLLBACK WORK.
+
+        ENDIF.
+
+      CATCH cx_sy_open_sql_db INTO DATA(lx_sql_error).
+        ROLLBACK WORK.
+
+    ENDTRY.
+
+  ENDMETHOD.
+
+  METHOD display_generation_summary.
+
+    DATA: lv_message TYPE string.
+
+    lv_message = |Generated { mv_generated_orders } service orders with { mv_generated_items } items successfully|.
+
+
+    " Output detailed summary to console
+
+
+  ENDMETHOD.
+
+  METHOD get_random_service_type.
+
+    DATA: lt_types TYPE STANDARD TABLE OF string WITH EMPTY KEY,
+          lv_index TYPE i.
+
+    lt_types = VALUE #( ( |TECH| ) ( |CONS| ) ( |MAIN| ) ( |SUPP| ) ( |TRAN| ) ).
+
+    lv_index = get_random_number( iv_max = lines( lt_types ) ).
+    READ TABLE lt_types INTO rv_type INDEX lv_index.
+
+  ENDMETHOD.
+
+  METHOD get_random_customer_id.
+
+    DATA: lv_number TYPE i.
+
+    lv_number = get_random_number( iv_min = 100000 iv_max = 999999 ).
+    rv_customer = |CUST{ lv_number }|.
+
+  ENDMETHOD.
+
+  METHOD get_random_country.
+
+    DATA: lt_countries TYPE STANDARD TABLE OF string WITH EMPTY KEY,
+          lv_index TYPE i.
+
+    lt_countries = VALUE #( ( |USA| ) ( |DEU| ) ( |GBR| ) ( |FRA| ) ( |JPN| )
+                           ( |CAN| ) ( |AUS| ) ( |ITA| ) ( |ESP| ) ( |NLD| )
+                           ( |CHN| ) ( |IND| ) ( |BRA| ) ( |MEX| ) ( |SGP| ) ).
+
+    lv_index = get_random_number( iv_max = lines( lt_countries ) ).
+    READ TABLE lt_countries INTO rv_country INDEX lv_index.
+
+  ENDMETHOD.
+
+  METHOD get_random_material.
+
+    DATA: lt_materials TYPE STANDARD TABLE OF string WITH EMPTY KEY,
+          lv_index TYPE i,
+          lv_suffix TYPE i.
+
+    lt_materials = VALUE #( ( |MAT-SERVICE| ) ( |MAT-CONSULT| ) ( |MAT-SUPPORT| )
+                           ( |MAT-MAINT| ) ( |MAT-TRAIN| ) ( |MAT-INSTALL| ) ).
+
+    lv_index = get_random_number( iv_max = lines( lt_materials ) ).
+    lv_suffix = get_random_number( iv_min = 1 iv_max = 999 ).
+
+    READ TABLE lt_materials INTO DATA(lv_prefix) INDEX lv_index.
+    rv_material = |{ lv_prefix }-{ lv_suffix }|.
+
+  ENDMETHOD.
+
+  METHOD get_random_product_hierarchy.
+
+    DATA: lt_hierarchies TYPE STANDARD TABLE OF string WITH EMPTY KEY,
+          lv_index TYPE i.
+
+    lt_hierarchies = VALUE #(
+      ( |Technology Services > Hardware Support| )
+      ( |Technology Services > Software Support| )
+      ( |Consulting Services > Business Analysis| )
+      ( |Consulting Services > Implementation| )
+      ( |Maintenance Services > Preventive| )
+      ( |Maintenance Services > Corrective| )
+      ( |Support Services > Premium Support| )
+      ( |Support Services > Standard Support| )
+      ( |Training Services > Technical Training| )
+      ( |Training Services > End User Training| )
+      ( |Installation Services > On-Site| )
+      ( |Installation Services > Remote| )
+    ).
+
+    lv_index = get_random_number( iv_max = lines( lt_hierarchies ) ).
+    READ TABLE lt_hierarchies INTO rv_hierarchy INDEX lv_index.
+
+  ENDMETHOD.
+
+  METHOD get_random_template.
+
+    DATA: lv_number TYPE i.
+
+    lv_number = get_random_number( iv_min = 1 iv_max = 20 ).
+    rv_template = |TEMP{ lv_number  }|.
+
+  ENDMETHOD.
+
+  METHOD get_random_user.
+
+    DATA: lt_users TYPE STANDARD TABLE OF string WITH EMPTY KEY,
+          lv_index TYPE i.
+
+    lt_users = VALUE #( ( |JSMITH| ) ( |MDOE| ) ( |AJOHNSON| ) ( |RBROWN| )
+                       ( |SWILSON| ) ( |KMILLER| ) ( |LDAVIS| ) ( |PGARCIA| )
+                       ( |TRODRIGUEZ| ) ( |JWILLIAMS| ) ( |MJONES| ) ).
+
+    lv_index = get_random_number( iv_max = lines( lt_users ) ).
+    READ TABLE lt_users INTO rv_user INDEX lv_index.
+
+  ENDMETHOD.
+
+  METHOD generate_uuid.
+
+    TRY.
+        " Use ABAP Cloud compatible UUID generation
+        DATA(lo_uuid) = cl_system_uuid=>create_uuid_c32_static( ).
+        rv_uuid = lo_uuid.
+
+      CATCH cx_uuid_error INTO DATA(lx_uuid_error).
+        " Fallback: generate simple UUID-like string
+        DATA: lv_timestamp TYPE timestampl,
+              lv_random TYPE i.
+
+        GET TIME STAMP FIELD lv_timestamp.
+        lv_random = get_random_number( iv_max = 999999 ).
+
+        rv_uuid = cl_uuid_factory=>create_system_uuid(  )->create_uuid_c32(  ).
+        rv_uuid = rv_uuid(32). " Ensure 32 characters max
+
+    ENDTRY.
+
+  ENDMETHOD.
+
+  METHOD get_random_number.
+
+    " ABAP Cloud compatible random number generation
+    DATA: lv_seed TYPE i.
+
+    " Use system time as seed
+    lv_seed = sy-uzeit.
+
+    " Simple linear congruential generator
+    DATA: lv_a TYPE i VALUE 1664525,
+          lv_c TYPE i VALUE 1013904223,
+          lv_m TYPE i VALUE 2147483647.
+
+    DATA: sv_last_random TYPE i.
+
+    IF sv_last_random = 0.
+      sv_last_random = lv_seed.
+    ENDIF.
+
+
+
+    " Scale to desired range
+    DATA(lv_range) = iv_max - iv_min + 1.
+    rv_number = iv_min + ( sv_last_random MOD lv_range ).
+
+    " Ensure we don't exceed maximum
+    IF rv_number > iv_max.
+      rv_number = iv_max.
+    ENDIF.
+
+  ENDMETHOD.
+ENDCLASS.
+
+
+---------------------------------------------------------------------
+create entities
+
+@AbapCatalog.viewEnhancementCategory: [#NONE]
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+@EndUserText.label: 'Service orders'
+@Metadata.ignorePropagatedAnnotations: true
+@ObjectModel.usageType:{
+    serviceQuality: #X,
+    sizeCategory: #S,
+    dataClass: #MIXED
+}
+define root view entity ZC_SRV_ORDERS as select from zsrv_order_hdr as hdr
+composition [0..*] of zi_srv_order_item         as _Items
+{
+    key service_order_id as ServiceOrderId,
+    service_order_type as ServiceOrderType,
+    customer_id as CustomerId,
+    created_by as CreatedBy,
+    created_date as CreatedDate,
+    country as Country,
+    status as Status,
+    _Items
+}
+
+
+
+
+@AbapCatalog.viewEnhancementCategory: [#NONE]
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+@EndUserText.label: 'zi_srv_order_item'
+@Metadata.ignorePropagatedAnnotations: true
+@ObjectModel.usageType:{
+    serviceQuality: #X,
+    sizeCategory: #S,
+    dataClass: #MIXED
+}
+define view entity zi_srv_order_item as select from zsrv_order_item
+association to parent ZC_SRV_ORDERS   
+        as _Header         on  $projection.ServiceOrderId = _Header.ServiceOrderId
+{
+    key service_item_id as ServiceItemId,
+    key service_order_id as ServiceOrderId,
+    material as Material,
+    product_hierarchy_id as ProductHierarchyId,
+    product_hierarchy as ProductHierarchy,
+    sales_organization as SalesOrganization,
+    distribution_channel as DistributionChannel,
+    division as Division,
+    service_order_template as ServiceOrderTemplate,
+    warranty_only as WarrantyOnly,
+    _Header
+}
+
+
+----Create auth field, auth object
+---------------------------------------Create DCL
+---------------------------------------Service Definition
+@EndUserText.label: 'Service order'
+define service ZSRV_ORDERS {
+  expose ZC_SRV_ORDERS     as ServicOrders;
+  expose zi_srv_order_item as ServicOrderItems;
+}
+
+
+---------------------------------------Service binding
+
