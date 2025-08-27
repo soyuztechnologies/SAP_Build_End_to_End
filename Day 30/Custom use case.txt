@@ -525,4 +525,17 @@ define service ZSRV_ORDERS {
 
 
 ---------------------------------------Service binding
+@EndUserText.label: 'Access Control'
+@MappingRole: true
+define role ZAC_SRV_ORDERS {
+    grant 
+        select
+            on
+                ZC_SRV_ORDERS
+                    where
+                        (Country) = aspect pfcg_auth('ZSRV_ORD', ZCTRY, ACTVT = '03');
+                        
+}
+
+------------------------------------------------------
 

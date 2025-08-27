@@ -1,0 +1,17 @@
+#Password=<< Existing password/certificate removed on export >>
+#
+#Sat May 17 06:58:07 UTC 2025
+sap.applicationdevelopment.actions.enabled=true
+Description=SAP S/4HANA System
+User=mob5
+sap.processautomation.enabled=true
+WebIDEEnabled=true
+URL=http\://stsrvr.mynetgear.com\:8021/sap/opu/odata/sap/API_BUSINESS_PARTNER
+Name=S4HANABP
+WebIDEUsage=odata_gen
+sap.build.usage=true
+Type=HTTP
+HTML5.DynamicDestination=true
+Authentication=BasicAuthentication
+AppgyverEnabled=true
+ProxyType=Internet
